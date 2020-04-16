@@ -1,0 +1,33 @@
+### Headers settings
+company: Emil Karimov
+
+### Xcode project settings
+project_name: MentalGrowth Test App
+xcodeproj_path: MentalGrowth Test App.xcodeproj
+
+### Code generation settings section
+# The main project target name
+project_target: MentalGrowth Test App
+
+# The file path for new modules
+project_file_path: MentalGrowth Test App/Modules/
+
+# The Xcode group path to new modules
+project_group_path: MentalGrowth Test App/Modules/
+
+### Tests generation settings section
+# The tests target name
+test_target: MentalGrowth Test AppTests
+
+# The file path for new tests
+test_file_path: MentalGrowth Test AppTests/Modules/
+
+# The Xcode group path to new tests
+test_group_path: MentalGrowth Test AppTests/Modules/
+
+### Dependencies settings section
+podfile_path: Podfile
+
+### Templates
+templates:
+- {name: viper}
