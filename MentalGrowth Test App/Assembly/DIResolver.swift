@@ -10,11 +10,11 @@ import UIKit
 
 protocol DIResolverComponents {
     func rootViewController() -> RootViewController
-    func getAudioMixer() -> AudioMixerManagerProtocol
+    func getAudioMixer(delegate: AudioMixerManagerDelegate?) -> AudioMixerManagerProtocol
 }
 
 class DIResolver {
-    private let audioMixer: AudioMixerManagerProtocol
+    private var audioMixer: AudioMixerManagerProtocol
     init(audioMixer: AudioMixerManagerProtocol) {
         self.audioMixer = audioMixer
     }
@@ -29,7 +29,8 @@ extension DIResolver: DIResolverComponents {
         return controller
     }
 
-    func getAudioMixer() -> AudioMixerManagerProtocol {
+    func getAudioMixer(delegate: AudioMixerManagerDelegate?) -> AudioMixerManagerProtocol {
+        self.audioMixer.delegate = delegate
         return self.audioMixer
     }
 }

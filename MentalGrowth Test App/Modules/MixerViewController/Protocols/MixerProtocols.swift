@@ -11,6 +11,8 @@ import UIKit
 // PRESENTER -> VIEW
 protocol MixerViewProtocol: class {
     func changeTitle(on tag: Int, status: PlayStatus)
+    func setProgress(on tag: Int, with value: Float)
+    func updateLabel(on tag: Int, with currentTime: String, and overallTime: String)
 }
 
 // PRESENTER -> WIREFRAME
@@ -23,4 +25,7 @@ protocol MixerPresenterProtocol: class {
 }
 
 // PRESENTER -> INTERACTOR
-protocol MixerInteractorProtocol: class { }
+protocol MixerInteractorProtocol: class {
+    func didClickPlay(track: SoundtrackType)
+    func didChange(volume: Float, at track: SoundtrackType)
+}

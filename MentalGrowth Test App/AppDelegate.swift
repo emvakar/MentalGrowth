@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        
+        let youTubeManager = YouTubeManager()
         let audioMixer = AudioMixerManager()
         let resolver = DIResolver(audioMixer: audioMixer)
         

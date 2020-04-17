@@ -27,6 +27,9 @@
 		20CA02D12449484F00EBF774 /* MixerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA02CA2449484F00EBF774 /* MixerViewController.swift */; };
 		20CA02D22449484F00EBF774 /* MixerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA02CC2449484F00EBF774 /* MixerProtocols.swift */; };
 		20CA02D32449484F00EBF774 /* MixerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA02CE2449484F00EBF774 /* MixerInteractor.swift */; };
+		20CA068C244A4B7500EBF774 /* AVAudio+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA068B244A4B7500EBF774 /* AVAudio+Extension.swift */; };
+		20CA068E244A4BB100EBF774 /* MixerManager+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA068D244A4BB100EBF774 /* MixerManager+Enums.swift */; };
+		20CA0690244A4BE100EBF774 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA068F244A4BE100EBF774 /* PlayerModel.swift */; };
 		356D21C2BE824F24BBC745B5 /* Pods_MentalGrowth_Test_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666E10F785B81CD8A56A357F /* Pods_MentalGrowth_Test_App.framework */; };
 		D54EFFF8749D9C9329B20081 /* Mixer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138BC541D91E7D0DE31C3B9B /* Mixer+Tests.swift */; };
 /* End PBXBuildFile section */
@@ -68,6 +71,9 @@
 		20CA02CA2449484F00EBF774 /* MixerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixerViewController.swift; sourceTree = "<group>"; };
 		20CA02CC2449484F00EBF774 /* MixerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixerProtocols.swift; sourceTree = "<group>"; };
 		20CA02CE2449484F00EBF774 /* MixerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixerInteractor.swift; sourceTree = "<group>"; };
+		20CA068B244A4B7500EBF774 /* AVAudio+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudio+Extension.swift"; sourceTree = "<group>"; };
+		20CA068D244A4BB100EBF774 /* MixerManager+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MixerManager+Enums.swift"; sourceTree = "<group>"; };
+		20CA068F244A4BE100EBF774 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		666E10F785B81CD8A56A357F /* Pods_MentalGrowth_Test_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MentalGrowth_Test_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31D5CBB39630095B30E4859 /* Pods-MentalGrowth Test App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalGrowth Test App.release.xcconfig"; path = "Target Support Files/Pods-MentalGrowth Test App/Pods-MentalGrowth Test App.release.xcconfig"; sourceTree = "<group>"; };
 		E97C0517E8FB9B4A362587B3 /* Pods-MentalGrowth Test App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalGrowth Test App.debug.xcconfig"; path = "Target Support Files/Pods-MentalGrowth Test App/Pods-MentalGrowth Test App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +234,9 @@
 			isa = PBXGroup;
 			children = (
 				20CA02B9244927C700EBF774 /* MixerManager.swift */,
+				20CA068B244A4B7500EBF774 /* AVAudio+Extension.swift */,
+				20CA068D244A4BB100EBF774 /* MixerManager+Enums.swift */,
+				20CA068F244A4BE100EBF774 /* PlayerModel.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -486,13 +495,16 @@
 				20CA02D12449484F00EBF774 /* MixerViewController.swift in Sources */,
 				20CA02C32449484800EBF774 /* Mixer+DIResolver.swift in Sources */,
 				20CA02D32449484F00EBF774 /* MixerInteractor.swift in Sources */,
+				20CA068C244A4B7500EBF774 /* AVAudio+Extension.swift in Sources */,
 				2082368A24478FF400556443 /* RootViewController.swift in Sources */,
+				20CA068E244A4BB100EBF774 /* MixerManager+Enums.swift in Sources */,
 				2082369524478FF400556443 /* BaseInteractor.swift in Sources */,
 				2082369224478FF400556443 /* BasePresenter.swift in Sources */,
 				2082369824478FF400556443 /* BaseWireframe.swift in Sources */,
 				2082368624478FF400556443 /* AppDelegate.swift in Sources */,
 				20CA02CF2449484F00EBF774 /* MixerPresenter.swift in Sources */,
 				20CA02D22449484F00EBF774 /* MixerProtocols.swift in Sources */,
+				20CA0690244A4BE100EBF774 /* PlayerModel.swift in Sources */,
 				2082369B24478FF400556443 /* DIResolver.swift in Sources */,
 				20CA02BA244927C700EBF774 /* MixerManager.swift in Sources */,
 				2082368F24478FF400556443 /* BaseViewController.swift in Sources */,

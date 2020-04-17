@@ -16,10 +16,11 @@ protocol MixerProtocol {
 extension DIResolver: MixerProtocol {
     func presentMixerViewController() -> UIViewController {
         let viewController = MixerViewController()
-        let interactor = MixerInteractor()
+        let interactor = MixerInteractor(mixer: self.getAudioMixer(delegate: nil))
         let wireFrame = MixerWireFrame(resolver: self)
-        let presenter = MixerPresenter(view: viewController, wireFrame: wireFrame, interactor: interactor, mixer: self.getAudioMixer())
+        let presenter = MixerPresenter(view: viewController, wireFrame: wireFrame, interactor: interactor)
         viewController.presenter = presenter
+        _ = self.getAudioMixer(delegate: presenter)
         return viewController
     }
 }

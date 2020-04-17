@@ -6,57 +6,33 @@
 //  Copyright © 2020 Emil Karimov. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
-import AVKit
-import MediaPlayer
 
-enum SoundtrackType: Int, CaseIterable {
-
-    case sound1 = 0
-    case sound2
-    case sound3
-
-    var value: String {
-        switch self {
-        case .sound1: return "Creeping_Spiders"
-        case .sound2: return "I_Feel_Like_Partying_Right_Now"
-        case .sound3: return "The_DeLong_Incident"
-        }
-    }
-
-    var ext: String { "mp3" }
-}
-
-enum PlayStatus {
-    case play
-    case pause
-    case stop
-
-    var title: String {
-        switch self {
-        case .play: return "Pause"
-        case .pause: return "Play"
-        case .stop: return "Play"
-        }
-    }
+protocol AudioMixerManagerDelegate: class {
+    func audioMixer(_ currentTrackPosition: Float, at tag: Int, currentTime: TimeInterval, overallTime: TimeInterval)
+    func updateStatus(_ track: SoundtrackType, status: PlayStatus)
 }
 
 protocol AudioMixerManagerProtocol {
-    @discardableResult
-    func play(track: SoundtrackType) -> PlayStatus
-    @discardableResult
-    func stop(track: SoundtrackType) -> PlayStatus
 
+    var delegate: AudioMixerManagerDelegate? { get set }
+
+    func play(track: SoundtrackType)
+    func stop(track: SoundtrackType)
     func changeVolume(track: SoundtrackType, value: Float)
 }
 
 final class AudioMixerManager {
 
+    weak var delegate: AudioMixerManagerDelegate?
+
     private var audioEngine: AVAudioEngine = AVAudioEngine()
     private var mixer: AVAudioMixerNode = AVAudioMixerNode()
 
-    private var players = [AVAudioPlayerNode]()
+    private var playerModels = [PlayerModel]()
+
+    private var isSeeking = false
+    private var timer: Timer?
 
     init() {
         self.setup()
@@ -73,76 +49,107 @@ final class AudioMixerManager {
 
     private func setup() {
 
-        do {
-            self.audioEngine.attach(self.mixer)
-            self.audioEngine.connect(self.mixer, to: self.audioEngine.outputNode, format: nil)
+        self.audioEngine.attach(self.mixer)
 
-            try self.audioEngine.start()
+        // соединяем микшер с аудио выходом
+        self.audioEngine.connect(self.mixer, to: self.audioEngine.mainMixerNode, format: nil)
 
-            for audioFile in SoundtrackType.allCases {
+        // переборка всех доступных треков
+        for (indx, audioFile) in SoundtrackType.allCases.enumerated() {
 
-                guard let audioFileUrl = Bundle.main.url(forResource: audioFile.value, withExtension: audioFile.ext) else { continue }
+            guard let audioFileUrl = Bundle.main.url(forResource: audioFile.value, withExtension: audioFile.ext) else { continue }
 
-                let audioPlayer = AVAudioPlayerNode()
-                audioPlayer.volume = 0.5
-                self.audioEngine.attach(audioPlayer)
+            let audioPlayer = AVAudioPlayerNode()
+            audioPlayer.volume = 0.5
+            self.audioEngine.attach(audioPlayer)
 
-                self.audioEngine.connect(audioPlayer, to: self.mixer, format: nil)
+            // соединяем плеер к микшеру
+            self.audioEngine.connect(audioPlayer, to: self.mixer, format: nil)
 
-                do {
-                    let file = try AVAudioFile(forReading: audioFileUrl)
-                    guard let buffer = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length)) else { continue }
-                    try file.read(into: buffer)
+            do {
+                let file = try AVAudioFile(forReading: audioFileUrl)
+                audioPlayer.scheduleFile(file, at: nil, completionHandler: nil)
 
-                    audioPlayer.scheduleBuffer(buffer, completionHandler: nil)
-                    
-                    
-                    if audioPlayer.isPlaying {
-                        print("[audioPlayer] is playing")
-                    }
-                    self.players.append(audioPlayer)
-                } catch let error {
-                    print(error.localizedDescription)
-                }
+                print("[\(String(describing: self)) - \(audioFile)] prepared")
+                let player = PlayerModel(index: indx, player: audioPlayer, file: file)
+                self.playerModels.append(player)
+            } catch let error {
+                print(error.localizedDescription)
             }
+        }
+
+        self.audioEngine.prepare()
+        do {
+            try audioEngine.start()
         } catch let error {
             print(error.localizedDescription)
         }
-        self.audioEngine.prepare()
+
         self.setUpAudioSession()
         print("[\(String(describing: self))] loaded!")
+
+        self.startUpdater()
+
+        self.timeUpdater(firstLaunch: true)
     }
 
-    private func getPlayer(for type: SoundtrackType) -> AVAudioPlayerNode? {
-        guard self.players.count > type.rawValue else { return nil }
-        return self.players[type.rawValue]
+    private func getPlayer(for type: SoundtrackType) -> PlayerModel? {
+        guard self.playerModels.count > type.rawValue else { return nil }
+        return self.playerModels[type.rawValue]
+    }
+
+    private func startUpdater() {
+
+        guard self.timer == nil else { return }
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeUpdater(firstLaunch:)), userInfo: nil, repeats: true)
+
+    }
+
+    @objc private func timeUpdater(firstLaunch: Bool = false) {
+
+        for model in self.playerModels {
+            if model.player.currentFrame >= model.file.length {
+                model.player.stop()
+                break
+            }
+
+            if model.player.isPlaying || firstLaunch {
+
+                let time = model.player.currentTime / model.file.duration
+                DispatchQueue.main.async {
+                    self.delegate?.audioMixer(Float(time), at: model.index, currentTime: model.player.currentTime, overallTime: model.file.duration)
+                }
+                debugPrint(Float(time))
+            }
+        }
+
     }
 }
 
 // MARK: - PlayerManagerProtocol
 extension AudioMixerManager: AudioMixerManagerProtocol {
 
-    @discardableResult
-    func play(track: SoundtrackType) -> PlayStatus {
-        guard let player = self.getPlayer(for: track) else { return .stop }
-        if player.isPlaying {
-            player.pause()
-            return .pause
+    func play(track: SoundtrackType) {
+        guard let model = self.getPlayer(for: track) else { return }
+        if model.player.isPlaying {
+            model.player.pause()
+            print("[player \(track.rawValue)] is paused")
+            self.delegate?.updateStatus(track, status: .pause)
         } else {
-            player.play()
-            return .play
+            model.player.play()
+            print("[player \(track.rawValue)] is played")
+            self.delegate?.updateStatus(track, status: .play)
         }
     }
 
-    @discardableResult
-    func stop(track: SoundtrackType) -> PlayStatus {
-        guard let player = self.getPlayer(for: track) else { return .stop }
-        player.stop()
-        return .stop
+    func stop(track: SoundtrackType) {
+        guard let model = self.getPlayer(for: track) else { return }
+        model.player.stop()
+        self.delegate?.updateStatus(track, status: .stop)
     }
 
     func changeVolume(track: SoundtrackType, value: Float) {
-        guard let player = self.getPlayer(for: track) else { return }
-        player.volume = value
+        guard let model = self.getPlayer(for: track) else { return }
+        model.player.volume = value
     }
 }
