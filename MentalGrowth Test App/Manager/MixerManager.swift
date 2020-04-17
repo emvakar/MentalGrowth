@@ -28,10 +28,25 @@ enum SoundtrackType: Int, CaseIterable {
     var ext: String { "mp3" }
 }
 
-protocol AudioMixerManagerProtocol {
+enum PlayStatus {
+    case play
+    case pause
+    case stop
 
-    func play(track: SoundtrackType)
-    func stop(track: SoundtrackType)
+    var title: String {
+        switch self {
+        case .play: return "Pause"
+        case .pause: return "Play"
+        case .stop: return "Play"
+        }
+    }
+}
+
+protocol AudioMixerManagerProtocol {
+    @discardableResult
+    func play(track: SoundtrackType) -> PlayStatus
+    @discardableResult
+    func stop(track: SoundtrackType) -> PlayStatus
 
     func changeVolume(track: SoundtrackType, value: Float)
 }
@@ -45,11 +60,9 @@ final class AudioMixerManager {
 
     init() {
         self.setup()
-
-
     }
 
-    func setUpAudioSession() {
+    private func setUpAudioSession() {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, options: .mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
@@ -71,7 +84,7 @@ final class AudioMixerManager {
                 guard let audioFileUrl = Bundle.main.url(forResource: audioFile.value, withExtension: audioFile.ext) else { continue }
 
                 let audioPlayer = AVAudioPlayerNode()
-                audioPlayer.volume = 0.3
+                audioPlayer.volume = 0.5
                 self.audioEngine.attach(audioPlayer)
 
                 self.audioEngine.connect(audioPlayer, to: self.mixer, format: nil)
@@ -82,7 +95,8 @@ final class AudioMixerManager {
                     try file.read(into: buffer)
 
                     audioPlayer.scheduleBuffer(buffer, completionHandler: nil)
-
+                    
+                    
                     if audioPlayer.isPlaying {
                         print("[audioPlayer] is playing")
                     }
@@ -101,7 +115,6 @@ final class AudioMixerManager {
 
     private func getPlayer(for type: SoundtrackType) -> AVAudioPlayerNode? {
         guard self.players.count > type.rawValue else { return nil }
-
         return self.players[type.rawValue]
     }
 }
@@ -109,18 +122,23 @@ final class AudioMixerManager {
 // MARK: - PlayerManagerProtocol
 extension AudioMixerManager: AudioMixerManagerProtocol {
 
-    func play(track: SoundtrackType) {
-        guard let player = self.getPlayer(for: track) else { return }
+    @discardableResult
+    func play(track: SoundtrackType) -> PlayStatus {
+        guard let player = self.getPlayer(for: track) else { return .stop }
         if player.isPlaying {
             player.pause()
+            return .pause
         } else {
             player.play()
+            return .play
         }
     }
 
-    func stop(track: SoundtrackType) {
-        guard let player = self.getPlayer(for: track) else { return }
+    @discardableResult
+    func stop(track: SoundtrackType) -> PlayStatus {
+        guard let player = self.getPlayer(for: track) else { return .stop }
         player.stop()
+        return .stop
     }
 
     func changeVolume(track: SoundtrackType, value: Float) {

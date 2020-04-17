@@ -28,11 +28,18 @@ class RootViewController: UIViewController {
     }
 
     private func showDefaultScreen() {
-        let vc = self.resolver.presentMixerViewController()
-        self.addChild(vc)
-        self.view.addSubview(vc.view)
-        vc.didMove(toParent: self)
+        let tabbarController = UITabBarController()
+        
+        let mixer = UINavigationController(rootViewController: self.resolver.presentMixerViewController())
+        mixer.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 0)
+        let videoList = BaseViewController()
+        videoList.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+        
+        tabbarController.setViewControllers([mixer, videoList], animated: false)
+        self.addChild(tabbarController)
+        self.view.addSubview(tabbarController.view)
+        tabbarController.didMove(toParent: self)
 
-        self.current = vc
+        self.current = tabbarController
     }
 }

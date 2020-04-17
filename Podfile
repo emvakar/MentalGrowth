@@ -7,8 +7,6 @@ use_frameworks!
 target 'MentalGrowth Test App' do
 
   pod 'DevHelper', :git => 'https://github.com/emvakar/DevHelper.git', :branch => 'master'
-  pod 'EKNetworking', :git => 'https://github.com/emvakar/EKNetworking.git', :branch => 'master'
-  pod 'R.swift', :inhibit_warnings => true
 
 end
 
