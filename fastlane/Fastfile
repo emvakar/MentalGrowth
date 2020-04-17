@@ -1,0 +1,102 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+DERIVED_PATH = "build"
+
+MAIN_PROJECT_FILE   = "MentalGrowth Test App.xcodeproj"
+MAIN_TARGET         = "MentalGrowth Test App"
+MAIN_SCHEME         = "MentalGrowth Test App"
+APP_IDENTIFIER      = "ru.karimov.MentalGrowth-Test-App"
+
+default_platform(:ios)
+
+before_all do
+    clear_derived_data(derived_data_path: DERIVED_PATH)
+end
+
+desc "Submit a new Beta Build to Apple TestFlight"
+lane :beta do |options|
+
+    build_number = get_build_number.to_i + 1
+    increment_build_number({
+        build_number: build_number
+    })
+    
+    version_number = get_version_number(
+        xcodeproj: MAIN_PROJECT_FILE,
+        target: MAIN_TARGET
+    )
+
+    cocoapods
+    
+    cert
+    sigh(
+        force: true,
+        app_identifier: APP_IDENTIFIER
+    )
+
+    if options[:version]
+        version_number = options[:version]
+        increment_version_number(
+            version_number: "#{version_number}"
+        )
+    end
+
+    build_app(
+              scheme: MAIN_SCHEME,
+              export_xcargs: "-allowProvisioningUpdates"
+              )
+
+    testflight(
+        skip_submission: true,
+        distribute_external: false,
+        skip_waiting_for_build_processing: false
+    )
+
+    clean_build_artifacts
+
+    commit_message = nil
+
+    if version_number.nil?
+        commit_message = "Build #{build_number}"
+    else
+        commit_message = "Version #{version_number} Build #{build_number}"
+    end
+
+    commit_version_bump(
+        message: "#{commit_message}",
+        xcodeproj: MAIN_PROJECT_FILE
+    )
+    
+    push_to_git_remote(
+      remote: "origin",         # optional, default: "origin"
+      local_branch: "HEAD",  # optional, aliased by "branch", default: "master"
+      remote_branch: "beta", # optional, default is set to local_branch
+      force: true,    # optional, default: false
+      tags: true     # optional, default: true
+    )
+
+    add_git_tag(
+      tag: "v#{version_number}-build-#{build_number}"
+    )
+    
+    push_git_tags
+
+end
+
+# error block is executed when a error occurs
+error do |lane, exception|
+
+end

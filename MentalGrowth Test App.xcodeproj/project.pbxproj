@@ -108,6 +108,7 @@
 		20CA06BC244A514100EBF774 /* HTTPHeaderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeaderHelper.swift; sourceTree = "<group>"; };
 		20CA06C0244A515D00EBF774 /* Playlist+DIResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Playlist+DIResolver.swift"; sourceTree = "<group>"; };
 		20CA06C2244A52B300EBF774 /* YouTubeLinkWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeLinkWrapper.swift; sourceTree = "<group>"; };
+		20CA06C5244A692F00EBF774 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		666E10F785B81CD8A56A357F /* Pods_MentalGrowth_Test_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MentalGrowth_Test_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31D5CBB39630095B30E4859 /* Pods-MentalGrowth Test App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalGrowth Test App.release.xcconfig"; path = "Target Support Files/Pods-MentalGrowth Test App/Pods-MentalGrowth Test App.release.xcconfig"; sourceTree = "<group>"; };
 		E97C0517E8FB9B4A362587B3 /* Pods-MentalGrowth Test App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalGrowth Test App.debug.xcconfig"; path = "Target Support Files/Pods-MentalGrowth Test App/Pods-MentalGrowth Test App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 		2082367924478FF400556443 = {
 			isa = PBXGroup;
 			children = (
+				20CA06C5244A692F00EBF774 /* fastlane */,
 				2082368424478FF400556443 /* MentalGrowth Test App */,
 				2060E09524491C7F00FF3601 /* MentalGrowth Test AppTests */,
 				2082368324478FF400556443 /* Products */,
