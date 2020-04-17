@@ -5,8 +5,11 @@ platform :ios, '13.0'
 use_frameworks!
 
 target 'MentalGrowth Test App' do
-
+  
   pod 'DevHelper', :git => 'https://github.com/emvakar/DevHelper.git', :branch => 'master'
-
+  pod 'EKNetworking', :git => 'https://github.com/emvakar/EKNetworking.git', :branch => 'master'
+  pod 'YoutubeDirectLinkExtractor'
+  pod 'Kingfisher', '~> 5.0'
+  
 end
 

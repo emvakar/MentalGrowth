@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EKNetworking
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let youTubeManager = YouTubeManager()
         let audioMixer = AudioMixerManager()
-        let resolver = DIResolver(audioMixer: audioMixer)
+        let networking = NetworkRequestProvider(networkWrapper: EKNetworkRequestWrapper())
+        let youtubeLinkWrapper = YouTubeLinkWrapper()
+        let resolver = DIResolver(audioMixer: audioMixer, networking: networking, youtubeLinkWrapper: youtubeLinkWrapper)
         
         self.resolver = resolver
         self.window = UIWindow(frame: UIScreen.main.bounds)

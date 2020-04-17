@@ -32,7 +32,7 @@ class RootViewController: UIViewController {
         
         let mixer = UINavigationController(rootViewController: self.resolver.presentMixerViewController())
         mixer.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 0)
-        let videoList = BaseViewController()
+        let videoList = UINavigationController(rootViewController: self.resolver.presentPlaylistViewController())
         videoList.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
         
         tabbarController.setViewControllers([mixer, videoList], animated: false)

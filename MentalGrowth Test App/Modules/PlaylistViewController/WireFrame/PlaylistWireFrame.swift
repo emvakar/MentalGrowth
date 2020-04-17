@@ -1,5 +1,5 @@
 //
-//  MixerWireFrame.swift
+//  PlaylistWireFrame.swift
 //  MentalGrowth Test App
 //
 //  Created by Emil Karimov on 17/04/2020.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MixerWireFrame: BaseWireFrame { }
+class PlaylistWireFrame: BaseWireFrame { }
 
-extension MixerWireFrame: MixerWireFrameProtocol { }
+extension PlaylistWireFrame: PlaylistWireFrameProtocol { }
