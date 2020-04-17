@@ -17,7 +17,12 @@
 		2082369B24478FF400556443 /* DIResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2082369A24478FF400556443 /* DIResolver.swift */; };
 		2082369F24478FF400556443 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2082369E24478FF400556443 /* Assets.xcassets */; };
 		208236A224478FF400556443 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 208236A024478FF400556443 /* LaunchScreen.storyboard */; };
+		20CA02BA244927C700EBF774 /* MixerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CA02B9244927C700EBF774 /* MixerManager.swift */; };
+		20CA02BD244929E300EBF774 /* Creeping_Spiders.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 20CA02BC244929E300EBF774 /* Creeping_Spiders.mp3 */; };
+		20CA02C024492A6000EBF774 /* I_Feel_Like_Partying_Right_Now.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 20CA02BE24492A5F00EBF774 /* I_Feel_Like_Partying_Right_Now.mp3 */; };
+		20CA02C124492A6000EBF774 /* The_DeLong_Incident.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 20CA02BF24492A6000EBF774 /* The_DeLong_Incident.mp3 */; };
 		356D21C2BE824F24BBC745B5 /* Pods_MentalGrowth_Test_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666E10F785B81CD8A56A357F /* Pods_MentalGrowth_Test_App.framework */; };
+		D54EFFF8749D9C9329B20081 /* Mixer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138BC541D91E7D0DE31C3B9B /* Mixer+Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		138BC541D91E7D0DE31C3B9B /* Mixer+Tests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Mixer+Tests.swift"; sourceTree = "<group>"; };
 		2060E09424491C7F00FF3601 /* MentalGrowth Test AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MentalGrowth Test AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2060E09624491C7F00FF3601 /* MentalGrowth_Test_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentalGrowth_Test_AppTests.swift; sourceTree = "<group>"; };
 		2060E09824491C7F00FF3601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +52,10 @@
 		2082369E24478FF400556443 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		208236A124478FF400556443 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		208236A324478FF400556443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20CA02B9244927C700EBF774 /* MixerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixerManager.swift; sourceTree = "<group>"; };
+		20CA02BC244929E300EBF774 /* Creeping_Spiders.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Creeping_Spiders.mp3; sourceTree = "<group>"; };
+		20CA02BE24492A5F00EBF774 /* I_Feel_Like_Partying_Right_Now.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = I_Feel_Like_Partying_Right_Now.mp3; sourceTree = "<group>"; };
+		20CA02BF24492A6000EBF774 /* The_DeLong_Incident.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = The_DeLong_Incident.mp3; sourceTree = "<group>"; };
 		666E10F785B81CD8A56A357F /* Pods_MentalGrowth_Test_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MentalGrowth_Test_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31D5CBB39630095B30E4859 /* Pods-MentalGrowth Test App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalGrowth Test App.release.xcconfig"; path = "Target Support Files/Pods-MentalGrowth Test App/Pods-MentalGrowth Test App.release.xcconfig"; sourceTree = "<group>"; };
 		E97C0517E8FB9B4A362587B3 /* Pods-MentalGrowth Test App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MentalGrowth Test App.debug.xcconfig"; path = "Target Support Files/Pods-MentalGrowth Test App/Pods-MentalGrowth Test App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +85,7 @@
 			children = (
 				2060E09624491C7F00FF3601 /* MentalGrowth_Test_AppTests.swift */,
 				2060E09824491C7F00FF3601 /* Info.plist */,
+				BD7FB760BDAAFA2FC6D842A5 /* Modules */,
 			);
 			path = "MentalGrowth Test AppTests";
 			sourceTree = "<group>";
@@ -102,7 +113,11 @@
 		2082368424478FF400556443 /* MentalGrowth Test App */ = {
 			isa = PBXGroup;
 			children = (
+				20CA02BC244929E300EBF774 /* Creeping_Spiders.mp3 */,
+				20CA02BE24492A5F00EBF774 /* I_Feel_Like_Partying_Right_Now.mp3 */,
+				20CA02BF24492A6000EBF774 /* The_DeLong_Incident.mp3 */,
 				2082368524478FF400556443 /* AppDelegate.swift */,
+				20CA02BB244927FB00EBF774 /* Manager */,
 				2082369E24478FF400556443 /* Assets.xcassets */,
 				208236A024478FF400556443 /* LaunchScreen.storyboard */,
 				208236A324478FF400556443 /* Info.plist */,
@@ -197,6 +212,14 @@
 			path = "Removable Resources";
 			sourceTree = "<group>";
 		};
+		20CA02BB244927FB00EBF774 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				20CA02B9244927C700EBF774 /* MixerManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		425BD284ABB079E1EFA6BC8B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +227,22 @@
 				C31D5CBB39630095B30E4859 /* Pods-MentalGrowth Test App.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B5C1A8F9DAB0292D0A602740 /* Mixer */ = {
+			isa = PBXGroup;
+			children = (
+				138BC541D91E7D0DE31C3B9B /* Mixer+Tests.swift */,
+			);
+			path = Mixer;
+			sourceTree = "<group>";
+		};
+		BD7FB760BDAAFA2FC6D842A5 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B5C1A8F9DAB0292D0A602740 /* Mixer */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		EDC15FF35F3737450F20264C /* Frameworks */ = {
@@ -305,7 +344,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2082369F24478FF400556443 /* Assets.xcassets in Resources */,
+				20CA02C024492A6000EBF774 /* I_Feel_Like_Partying_Right_Now.mp3 in Resources */,
 				208236A224478FF400556443 /* LaunchScreen.storyboard in Resources */,
+				20CA02BD244929E300EBF774 /* Creeping_Spiders.mp3 in Resources */,
+				20CA02C124492A6000EBF774 /* The_DeLong_Incident.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2060E09724491C7F00FF3601 /* MentalGrowth_Test_AppTests.swift in Sources */,
+				D54EFFF8749D9C9329B20081 /* Mixer+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +415,7 @@
 				2082369824478FF400556443 /* BaseWireframe.swift in Sources */,
 				2082368624478FF400556443 /* AppDelegate.swift in Sources */,
 				2082369B24478FF400556443 /* DIResolver.swift in Sources */,
+				20CA02BA244927C700EBF774 /* MixerManager.swift in Sources */,
 				2082368F24478FF400556443 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

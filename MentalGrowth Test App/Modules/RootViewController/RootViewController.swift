@@ -28,7 +28,7 @@ class RootViewController: UIViewController {
     }
 
     private func showDefaultScreen() {
-        let vc = BaseViewController()
+        let vc = self.resolver.presentMixerViewController()
         self.addChild(vc)
         self.view.addSubview(vc.view)
         vc.didMove(toParent: self)

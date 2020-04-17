@@ -8,9 +8,17 @@
 
 import UIKit
 
-protocol DIResolverComponents { }
+protocol DIResolverComponents {
+    func rootViewController() -> RootViewController
+    func getAudioMixer() -> AudioMixerManagerProtocol
+}
 
-class DIResolver { }
+class DIResolver {
+    private let audioMixer: AudioMixerManagerProtocol
+    init(audioMixer: AudioMixerManagerProtocol) {
+        self.audioMixer = audioMixer
+    }
+}
 
 // MARK: - DIResolverComponents
 
@@ -21,4 +29,7 @@ extension DIResolver: DIResolverComponents {
         return controller
     }
 
+    func getAudioMixer() -> AudioMixerManagerProtocol {
+        return self.audioMixer
+    }
 }
